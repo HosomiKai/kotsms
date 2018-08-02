@@ -44,7 +44,7 @@ MSG;
             $message = print_r($kotsms,true);
         }
 
-        return view('Kotsms::welcome', compact('message'));
+        return view('Kotsms::demo', compact('message'));
     }
 
     /**
