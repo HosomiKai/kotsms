@@ -16,5 +16,13 @@
         "psr-4": {
             "Hosomikai\\Kotsms\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hsomikai\\Kotsms\\KotsmsServiceProvider"
+            ]
+        }
     }
+
 }
