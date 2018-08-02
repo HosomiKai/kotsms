@@ -1,12 +1,15 @@
 {
     "name": "hosomikai/kotsms",
     "description": "send sms use kotsms service",
+    "keywords": ["kotsms","簡訊王","sms"],
+    "license": "MIT",
     "authors": [
         {
             "name": "hosomikai",
             "email": "showking111@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-4": {
