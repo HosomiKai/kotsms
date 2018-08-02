@@ -1,0 +1,16 @@
+{
+    "name": "hosomikai/kotsms",
+    "description": "send sms use kotsms service",
+    "authors": [
+        {
+            "name": "hosomikai",
+            "email": "showking111@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Hosomikai\\Kotsms\\": "src/"
+        }
+    }
+}
