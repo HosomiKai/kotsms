@@ -18,7 +18,7 @@ class KotsmsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/Views', 'Kotsms');
 
         $this->publishes([
-            __DIR__.'/Config/kotsms.php' => config_path('kotsms.php'),
+            __DIR__ . '/Config/kotsms.php' => config_path('kotsms.php'),
         ], 'config');
     }
 
