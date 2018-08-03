@@ -141,14 +141,13 @@ class Kotsms
             "success" => false,
             "status_code" => 400
         );
-
+//        return $status;
         $data = [
-            $status[0] => $status[1],
+            $status[0] => rtrim($status[1]),
             'message' => ''
         ];
-
-        switch ($status[1]){
-            case '-1':
+        switch ($data[$status[0]]){
+            case "-1":
                 $data['message'] = 'CGI string error ，系統維護中或其他錯誤 ,帶入的參數異常,伺服器異常';
                 break;
             case '-2':
@@ -194,9 +193,15 @@ class Kotsms
                 $data['message'] = '簡訊為空';
                 break;
             default:
-                $data['message'] = '發送成功';
-                $resp['success'] = true;
-                $resp['status_code'] = 200;
+                if((int)$data[$status[0]] > 0 ){
+                    $data['message'] = '發送成功';
+                    $resp['success'] = true;
+                    $resp['status_code'] = 200;
+                }else{
+                    $data['message'] = '發送失敗';
+                    $resp['success'] = false;
+                    $resp['status_code'] = 400;
+                }
                 break;
         }
         $resp['data'] = $data;

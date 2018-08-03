@@ -14,8 +14,7 @@ class KotsmsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        $message = 'Hello Kotsms';
-        return view('Kotsms::demo', compact('message'));
+        return view('Kotsms::demo');
     }
 
     /**
@@ -38,13 +37,12 @@ class KotsmsController extends Controller
 提醒您，請勿將此驗證碼提供給其他人以保障您的使用安全。
 MSG;
             $custom = request()->send_content;
-            $content.= $custom . ' ' .$content;
+            $content = $custom;
 
             $kotsms = Kotsms::to(request()->to_number)->content($content)->send()->getStatus();
-            $message = print_r($kotsms,true);
         }
 
-        return view('Kotsms::demo', compact('message'));
+        return view('Kotsms::demo', compact('kotsms'));
     }
 
     /**

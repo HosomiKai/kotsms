@@ -10,5 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test/kotsms', 'Hosomikai\Kotsms\Controllers\KotsmsController@index');
-Route::post('test/kotsms', 'Hosomikai\Kotsms\Controllers\KotsmsController@send');
+
+Route::get('test/kotsms', 'Hosomikai\Kotsms\Controllers\KotsmsController@index')->name('kotsms.demo');
+Route::post('test/kotsms', 'Hosomikai\Kotsms\Controllers\KotsmsController@send')->name('kotsms.send');
