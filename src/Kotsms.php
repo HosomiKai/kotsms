@@ -174,7 +174,7 @@ class Kotsms
             case '-59999':
                 $data['message'] = '帳務系統異常 簡訊無法扣款送出';
                 break;
-            case '60002':
+            case '-60002':
                 $data['message'] = '您帳戶中的點數不足';
                 break;
             case '-60014':
