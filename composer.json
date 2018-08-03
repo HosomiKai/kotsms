@@ -21,7 +21,10 @@
         "laravel": {
             "providers": [
                 "Hosomikai\\Kotsms\\KotsmsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Kotsms": "Hosomikai\\Kotsms\\Facade"
+            }
         }
     }
 
