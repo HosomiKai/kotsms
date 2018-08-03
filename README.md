@@ -13,7 +13,9 @@ composer require hosomikai/kotsms
 或者是新增package至composer.json
 ```
 "require": {
-        //......
+
+        // ...
+        
         "hosomikai/kotsms": "^1.0",
 },
 ```
@@ -31,7 +33,9 @@ composer install
 增加`config/app.php`中的`providers`和`aliases`的參數 。
 ```
 'providers' => [ 
+
         // ... 
+        
         Hosomikai\Kotsms\KotsmsServiceProvider::class, 
 ]
 
