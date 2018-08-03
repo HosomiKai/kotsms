@@ -20,7 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Hsomikai\\Kotsms\\KotsmsServiceProvider"
+                "Hosomikai\\Kotsms\\KotsmsServiceProvider"
             ]
         }
     }
