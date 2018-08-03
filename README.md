@@ -13,7 +13,8 @@ composer require hosomikai/kotsms
 或者是新增package至composer.json
 ```
 "require": {
-  "hosomikai/kotsms": "dev-master"
+        //......
+        "hosomikai/kotsms": "^1.0",
 },
 ```
 然後更新安裝
