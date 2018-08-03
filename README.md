@@ -67,5 +67,5 @@ php artisan vendor:publish
         $to_number = '0987987978';   //發送對象手機號碼
         
         Kotsms::to(to_number)->content($content)->send();               //發送簡訊
-        Kotsms::to(to_number)->content($content)->send()->getStatus();  //發送簡訊，並回傳發送結果狀態
+        $result = Kotsms::to(to_number)->content($content)->send()->getStatus();  //發送簡訊，並回傳發送結果狀態
     }
