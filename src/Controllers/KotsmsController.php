@@ -3,7 +3,9 @@
 namespace Hosomikai\Kotsms\Controllers;
 
 use Hosomikai\Kotsms\Facade\Kotsms;
-use Hosomikai\Kotsms\Helper;
+use Hosomikai\Kotsms\Helper\Faker;
+use Hosomikai\Kotsms\Kotsms as SMS;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -11,15 +13,15 @@ use Illuminate\View\View;
 class KotsmsController
 {
     /**
-     * Helper.
+     * faker.
      *
-     * @var Helper
+     * @var faker
      */
-    protected $helper;
+    protected $faker;
 
-    public function __construct(Helper $helper)
+    public function __construct(Faker $faker)
     {
-        $this->helper = $helper;
+        $this->faker = $faker;
     }
 
     /**
@@ -27,28 +29,29 @@ class KotsmsController
      */
     public function index(): View
     {
-        $content = $this->helper->demoContent();
+        $points = Kotsms::queryUserPoints();
 
-        return view('Kotsms::demo', compact('content'));
+        $content = $this->faker->demoContent();
+
+        return view('Kotsms::demo', compact('content', 'points'));
     }
 
     /**
      * 寄送簡訊.
      */
-    public function send(Request $request): View
+    public function send(Request $request): array
     {
         $this->validator($request->all())->validate();
 
-        $kotsms = Kotsms::to($request->get('number'))
-            ->content($request->get('content'))
-            ->send()
-            ->getStatus();
+        $response = Kotsms::to($request->get('number'))
+                            ->content($request->get('content'))
+                            ->send();
 
-        return view('Kotsms::demo', compact('kotsms'));
+        return $response->toArray();
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Get a validator for an incoming sms request.
      */
     protected function validator(array $data)
     {

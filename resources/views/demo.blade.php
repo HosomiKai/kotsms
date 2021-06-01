@@ -74,21 +74,10 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">{{ __('簡訊王測試簡訊') }}</div>
+                            <div class="card-header">{{ __('簡訊王測試簡訊') }} 剩餘點數: {{ $points ?? 0 }}</div>
                             <div class="card-body">
                                 <form method="post" action="{{ route('kotsms.send') }}">
                                     @csrf
-
-                                    @if (isset($kotsms['errors']))
-                                    <div class="alert alert-warning" role="alert">
-                                        <strong>錯誤！</strong>{{ $kotsms['errors']['message'] }}
-                                    </div>
-                                    @elseif(isset($kotsms['success']) && $kotsms['success'])
-                                        <div class="alert alert-success" role="alert">
-                                            {{ $kotsms['data']['message'] }}
-                                        </div>
-                                    @endif
-
                                     <div class="form-group row">
                                         <label for="mobile" class="col-sm-4 col-form-label text-md-right">{{ __('手機號碼') }}</label>
 
