@@ -1,7 +1,11 @@
 {
     "name": "hosomikai/kotsms",
     "description": "Send sms use kotsms service - Laravel 5 version",
-    "keywords": ["kotsms","簡訊王","sms"],
+    "keywords": [
+        "kotsms",
+        "簡訊王",
+        "sms"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +13,6 @@
             "email": "showking111@gmail.com"
         }
     ],
-    "version": "1.0.0",
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
@@ -27,5 +30,4 @@
             }
         }
     }
-
 }
