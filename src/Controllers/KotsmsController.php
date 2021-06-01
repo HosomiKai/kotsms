@@ -2,62 +2,59 @@
 
 namespace Hosomikai\Kotsms\Controllers;
 
-use App\Http\Controllers\Controller;
+use Hosomikai\Kotsms\Facade\Kotsms;
+use Hosomikai\Kotsms\Helper;
 use Illuminate\Http\Request;
-use \Hosomikai\Kotsms\Facade\Kotsms;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 
-class KotsmsController extends Controller
+class KotsmsController
 {
     /**
-     * Demo 寄送簡訊頁面
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Helper.
+     *
+     * @var Helper
      */
-    public function index(){
-        return view('Kotsms::demo');
+    protected $helper;
+
+    public function __construct(Helper $helper)
+    {
+        $this->helper = $helper;
     }
 
     /**
-     * 寄送簡訊
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Demo 寄送簡訊頁面.
      */
-    public function send(){
-        $rules = [];
-        $rules['to_number'] = 'required';
-        $rules['send_content'] = 'required';
+    public function index(): View
+    {
+        $content = $this->helper->demoContent();
 
-        $validator = Validator::make(request()->all(),$rules);
-        if($validator->fails()){
-            $message = $validator->fails()->first();
-        }else{
-            $verification_code = self::generatePIN();
+        return view('Kotsms::demo', compact('content'));
+    }
 
-            $content =<<<MSG
-您的驗證碼為 {$verification_code} 。 此驗證碼10分鐘內有效。
-提醒您，請勿將此驗證碼提供給其他人以保障您的使用安全。
-MSG;
-            $custom = request()->send_content;
-            $content = $custom;
+    /**
+     * 寄送簡訊.
+     */
+    public function send(Request $request): View
+    {
+        $this->validator($request->all())->validate();
 
-            $kotsms = Kotsms::to(request()->to_number)->content($content)->send()->getStatus();
-        }
+        $kotsms = Kotsms::to($request->get('number'))
+            ->content($request->get('content'))
+            ->send()
+            ->getStatus();
 
         return view('Kotsms::demo', compact('kotsms'));
     }
 
     /**
-     * 隨機產生驗證碼
-     * @param int $digits
-     * @return string
+     * Get a validator for an incoming registration request.
      */
-    public function generatePIN($digits = 4){
-        $i = 0; //counter
-        $pin = ""; //our default pin is blank.
-        while($i < $digits){
-            //generate a random number between 0 and 9.
-            $pin .= mt_rand(0, 9);
-            $i++;
-        }
-        return $pin;
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'number' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
     }
 }

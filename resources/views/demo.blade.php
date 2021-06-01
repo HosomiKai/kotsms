@@ -93,14 +93,14 @@
                                         <label for="mobile" class="col-sm-4 col-form-label text-md-right">{{ __('手機號碼') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="mobile" type="number" class="form-control" name="to_number" value="" required autofocus>
+                                            <input id="mobile" type="number" class="form-control" name="number" value="" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="content" class="col-sm-4 col-form-label text-md-right">{{ __('簡訊內容') }}</label>
 
                                         <div class="col-md-6">
-                                            <textarea id="content" type="content" class="form-control" name="send_content" required></textarea>
+                                            <textarea id="content" type="content" class="form-control" name="content" rows="10" required>{{ $content ?? null }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-0">
