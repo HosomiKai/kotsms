@@ -22,6 +22,7 @@ KOTSMS_PASSWORD="your password"
 ```
 KOTSMS_LOAD_DEMO=true
 ```
+設定完成後瀏覽 `http://localhost:8000/test/kotsms`
 
 如果你要接收簡訊王發送簡訊後的結果
 ```
