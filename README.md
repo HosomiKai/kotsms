@@ -1,76 +1,107 @@
-# Kotsms 簡訊王發送簡訊API
+# Kotsms 簡訊王非官方 Laravel 發送簡訊 API
 
-適用對象:以Laravel 5 欲使用簡訊服務
+## Installation
 
-實作版本：Laravel 5.6
 
-## Step 1 : Download the package
+Via Composer
 
-composer命令安裝	
-```
-composer require hosomikai/kotsms
-```
-或者是新增package至composer.json
-```
-"require": {
+### 1. Require the Package
 
-        // ...
-        
-        "hosomikai/kotsms": "^1.0",
-},
 ```
-然後更新安裝
-```
-composer update
-```
-或全新安裝
-```
-composer install
+$ composer require hosomikai/kotsms
+
 ```
 
-## Step 2 : Modify config file**
+### 2. Set up env `.env`
 
-增加`config/app.php`中的`providers`和`aliases`的參數 。
 ```
-'providers' => [ 
-
-        // ... 
-        
-        Hosomikai\Kotsms\KotsmsServiceProvider::class, 
-]
-
-'aliases' => [ 
-
-        // ... 
-        
-        'Kotsms' => Hosomikai\Kotsms\Facade\Kotsms::class, 
-]
+KOTSMS_USERNAME="your username"
+KOTSMS_PASSWORD="your password"
 ```
 
-## Step 3 : Publish config to your project**
-
-執行下列命令，將package的config檔配置到你的專案中
+如果你想載入demo範例
 ```
-php artisan vendor:publish
+KOTSMS_LOAD_DEMO=true
 ```
-至config/kotsms.php中確認 Kotsms 設定：
 
-    return [
-        'username' => env('Kotsms_Username', ''),       //簡訊王帳號
-        'password' => env('Kotsms_Password', ''),       //簡訊王密碼
-        'ReturnURL' => env('Kotsms_ReturnURL', ''),     //發送簡訊是否成功的狀態回報網址, 若不宣告此參數時為不回報。
-    ];
+如果你要接收簡訊王發送簡訊後的結果
+```
+KOTSMS_RETURN_URL="your url for accepts kotsms request after send sms"
+```
 
-**How To Use -->發送簡訊
+## Usage
 
-在Controller中
-      
-    use Kotsms; 
-    public function Demo()
-    {   
-        $content = 'hello world!';   //發送內容
-        $to_number = '0911123456';   //發送對象手機號碼
-        
-        Kotsms::to($to_number)->content($content)->send();                         //發送簡訊
-        $result = Kotsms::to($to_number)->content($content)->send()->getStatus();  //發送簡訊，並回傳發送結果狀態
+### 1. 發送簡訊
+
+```
+use Kotsms; 
+
+...
+    $content = 'hello world!';   //發送內容
+    $smsNumber = '0911123456';   //發送對象手機號碼
+    
+    $costPoints = Kotsms::countAmount($content);    //試算此封簡訊會花費多少點數
+
+    //發送簡訊
+    $response = Kotsms::to($smsNumber)
+                    ->content($content)
+                    ->send();
+    
+    $response->isSuccess();     //是否成功
+    $response->getMessage();    //回傳成功或錯誤訊息
+    $response->toArray();
+
+```
+
+toArray格式：
+
+```
+//成功
+[
+    'value' => 'kmsgid',
+    'message' => '成功',
+    'success' => true,
+];
+
+//失敗
+[
+    'value' => '-60002',
+    'message' => '您帳戶中的點數不足',
+    'success' => false,
+];
+
+```
+
+### 2. 查詢點數
+
+```
+use Kotsms; 
+
+...
+
+//剩餘點數
+$points = Kotsms::queryUserPoints();
+    
+```
+
+### 3. 查詢簡訊發送狀態
+
+```
+use Kotsms; 
+...
+    $reposnse = Kotsms::queryStatus($kmsgid);
+
+    if ($response->isSuccess()) {
+        //成功
+    } else {
+        //失敗
     }
+```
+
+
+## Change log
+
+Please see the [changelog](changelog.md) for more information on what has changed recently.
+
+## TODO
+- 
