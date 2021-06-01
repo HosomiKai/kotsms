@@ -5,7 +5,6 @@ namespace Hosomikai\Kotsms\Controllers;
 use Hosomikai\Kotsms\Facade\Kotsms;
 use Hosomikai\Kotsms\Helper\Faker;
 use Hosomikai\Kotsms\Kotsms as SMS;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;

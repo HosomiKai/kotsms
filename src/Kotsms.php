@@ -3,7 +3,6 @@
 namespace Hosomikai\Kotsms;
 
 use Hosomikai\Kotsms\Exceptions\KotsmsException;
-use Hosomikai\Kotsms\KotsmsResponse;
 
 /**
  * 串接簡訊王 API 用來發送簡訊
