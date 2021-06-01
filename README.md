@@ -9,7 +9,6 @@ Via Composer
 
 ```
 $ composer require hosomikai/kotsms
-
 ```
 
 ### 2. Set up env `.env`
