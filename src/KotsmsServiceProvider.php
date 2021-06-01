@@ -13,13 +13,18 @@ class KotsmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include(__DIR__ . '/routes.php');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/kotsms.php' => config_path('kotsms.php'),
+            ], 'kotsms-config');
+        }
 
-        $this->loadViewsFrom(__DIR__ . '/Views', 'Kotsms');
+        $this->mergeConfigFrom(__DIR__ . '/../config/kotsms.php', 'kotsms');
 
-        $this->publishes([
-            __DIR__ . '/Config/kotsms.php' => config_path('kotsms.php'),
-        ], 'config');
+        //載入demo
+        if (config('kotsms.load_demo_service', false)) {
+            $this->app->register(KotsmsDemoServiceProvider::class);
+        }
     }
 
     /**
@@ -29,7 +34,6 @@ class KotsmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //Facade => Custom Class
         $this->app->singleton('kotsms', function ($app) {
             return new Kotsms();
         });
