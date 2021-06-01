@@ -1,8 +1,8 @@
 <?php
 
-namespace Hosomikai\Kotsms;
+namespace Hosomikai\Kotsms\Helper;
 
-class Helper
+class Faker
 {
     /**
      * demo使用
