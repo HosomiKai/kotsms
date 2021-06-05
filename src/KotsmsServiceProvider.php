@@ -20,11 +20,6 @@ class KotsmsServiceProvider extends ServiceProvider
         }
 
         $this->mergeConfigFrom(__DIR__ . '/../config/kotsms.php', 'kotsms');
-
-        //載入demo
-        if (config('kotsms.load_demo_service', false)) {
-            $this->app->register(KotsmsDemoServiceProvider::class);
-        }
     }
 
     /**
