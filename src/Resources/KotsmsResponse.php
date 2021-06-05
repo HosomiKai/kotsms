@@ -1,6 +1,6 @@
 <?php
 
-namespace Hosomikai\Kotsms;
+namespace Hosomikai\Kotsms\Resources;
 
 /**
  * Response Model

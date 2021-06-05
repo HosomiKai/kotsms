@@ -3,6 +3,8 @@
 namespace Hosomikai\Kotsms;
 
 use Hosomikai\Kotsms\Exceptions\KotsmsException;
+use Hosomikai\Kotsms\Resources\KotsmsQueryPointResponse;
+use Hosomikai\Kotsms\Resources\KotsmsResponse;
 
 /**
  * 串接簡訊王 API 用來發送簡訊
@@ -147,7 +149,7 @@ class Kotsms
             'password' => $this->password,
         ]);
 
-        $response = new KotsmsResponse(
+        $response = new KotsmsQueryPointResponse(
             $this->makeHttpGetRequest($this->apiPoints, $queryString)
         );
 
