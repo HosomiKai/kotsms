@@ -4,6 +4,7 @@ namespace Hosomikai\Kotsms;
 
 use Hosomikai\Kotsms\Exceptions\KotsmsException;
 use Hosomikai\Kotsms\Resources\KotsmsQueryPointResponse;
+use Hosomikai\Kotsms\Resources\KotsmsQueryStatusResponse;
 use Hosomikai\Kotsms\Resources\KotsmsResponse;
 
 /**
@@ -165,7 +166,7 @@ class Kotsms
      *
      * @return void
      */
-    public function queryStatus(string $kmsgid): KotsmsResponse
+    public function queryStatus(string $kmsgid): KotsmsQueryStatusResponse
     {
         $queryString = $this->getQueryString([
             'username' => $this->username,
@@ -173,7 +174,7 @@ class Kotsms
             'kmsgid' => $kmsgid,
         ]);
 
-        return new KotsmsResponse(
+        return new KotsmsQueryStatusResponse(
             $this->makeHttpGetRequest($this->apiStatusQuery, $queryString)
         );
     }
