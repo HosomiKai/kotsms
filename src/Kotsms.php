@@ -189,7 +189,7 @@ class Kotsms
         // dstaddr= 接收門號
         // dlvtime= 電信系統發出時間
         // donetime= 手機用戶端回報狀態時間(包含成功發送,無法投遞….等狀態)
-        // statusstr= 狀態字串 DELIVERED, EXPIRED, DELETED, UNDELIVERABLE, ACCEPTED, UNKNOWN, REJECTED, SYNTAXERROR
+        // statusstr= 狀態字串 DELIVRD, EXPIRED, DELETED, UNDELIV, ACCEPTD, UNKNOWN, REJECTD, SYNTAXE
     }
 
     public function getPostData(): array
