@@ -47,7 +47,7 @@ class KotsmsResponse
      */
     public function isSuccess(): bool
     {
-        return $this->value > 0 || 'SUCCESSED' == $this->value;
+        return $this->value > 0;
     }
 
     /**
@@ -145,9 +145,8 @@ class KotsmsResponse
     {
         //送出訊息格式範例: kmsgid=-2
         //送出訊息格式範例 kmsgid=308109377
-        //查詢結果範例 -2
-        $result = explode('=', $result);
+        parse_str($result, $data);
 
-        $this->value = count($result) > 1 ? rtrim($result[1]) : $result[0];
+        $this->value = $data['kmsgid'] ?? null;
     }
 }
