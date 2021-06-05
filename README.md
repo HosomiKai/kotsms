@@ -18,9 +18,12 @@ KOTSMS_USERNAME="your username"
 KOTSMS_PASSWORD="your password"
 ```
 
-如果你想載入demo範例
+如果你想載入demo範例 `config/app.php`
 ```
-KOTSMS_LOAD_DEMO=true
+'providers' => [
+    ...
+    Hosomikai\Kotsms\KotsmsDemoServiceProvider::class,
+]
 ```
 設定完成後瀏覽 `http://localhost:8000/test/kotsms`
 
