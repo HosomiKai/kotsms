@@ -1,5 +1,10 @@
 # Kotsms 簡訊王非官方 Laravel 發送簡訊 API
 
+## Requirement for laravel 5.6 - 8.x
+
+#### PHP >= 7
+
+
 ## Installation
 
 
